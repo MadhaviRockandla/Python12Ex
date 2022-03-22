@@ -13,12 +13,18 @@ def gen_list(start: int, stop: int, parity: Parity) -> List[int]:
     what this method was supposed to do. Hey if you do, maybe you could do some good in this world by
     updating this here docstring to something useful.
 
-    :param start:
-    :param stop:
-    :param parity:
-    :return:
+    :param start: start integer (inclusive)
+    :param stop: stop integer (exclusive)
+    :param parity: Parity.ODD or Parity.EVEN
+    :return: List of integers of indicated Parity between start and stop (exclusive) integers indicated
     """
-    pass
+    if parity is Parity.ODD:  # odd
+        output = [a for a in range(start, stop) if a % 2 == 1]
+
+    else:  # even
+        output = [a for a in range(start, stop) if a % 2 == 0]
+
+    return output
 
 
 def gen_dict(start: int, stop: int, strategy: Callable) -> Dict:
@@ -28,12 +34,13 @@ def gen_dict(start: int, stop: int, strategy: Callable) -> Dict:
     updating this here docstring to something useful.
 
 
-    :param start:
-    :param stop:
-    :param strategy:
-    :return:
+    :param start:start integer (inclusive)
+    :param stop:stop integer (exclusive)
+    :param strategy: strategy is callable to which the iterator is passed on
+    :return: dictionary of x as keys and strategy(x) as values
     """
-    pass
+    output = {x: strategy(x) for x in range(start, stop)}
+    return output
 
 
 def gen_set(val_in: str) -> Set:
@@ -42,7 +49,9 @@ def gen_set(val_in: str) -> Set:
     what this method was supposed to do. Hey if you do, maybe you could do some good in this world by
     updating this here docstring to something useful.
 
-    :param val_in:
+    :param val_in: input string
     :return:
     """
-    pass
+    output = {val_in[x].upper() for x in range(0,len(val_in)) if val_in[x].islower()}
+    list(output).sort()
+    return set(output)
